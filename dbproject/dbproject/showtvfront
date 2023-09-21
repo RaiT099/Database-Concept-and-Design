@@ -1,0 +1,51 @@
+<?php
+	session_start();
+	$conn= mysqli_connect("127.0.0.1:3307", "root", "", "project");
+	if ($con-> connect_error)
+	{
+		die("Connection failed:" . $con-> connect_error);
+	}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>TV Series</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<table>
+							 						<thead>
+							 							<tr>
+							 								<th>TV ID</th>
+							 								<th>TV Name</th>
+							 							</tr>
+							 						</thead>
+								 						<tbody>
+								 								
+								 								<?php
+								 								 $sql = "SELECT * FROM tv_series";
+								 								 $result = $conn->query($sql);
+
+								 								 if (!$result) {
+																	    trigger_error('Invalid query: ' . $conn->error);
+																	}
+
+								 								 if($result->num_rows > 0) {
+									 								 while($row = $result->fetch_assoc())
+									 								 {
+									 									?>	
+									 									<tr>
+									 										<td><?php echo$row ["tv_id"]?> </td>
+									 										<td>
+									 											<?php echo$row ["TV_Name"];?>
+									 									</tr>
+									 								 	<?php
+									 								 }
+								 								} else "no result";
+
+								 								
+								 								 ?>
+								 						</tbody>
+							 					</table>
+</head>
+</html>
